@@ -92,4 +92,4 @@ $\int_{cs}\rho\vec{\mathbf{v}}\cdot\hat{n}\cdot\mathrm d A$ - Net rate of flow o
 
 $\delta \rightarrow$ ![image1](https://github.com/Jenutka/CFD_ML/blob/master/images/1.svg?source=https://github.com/Jenutka/CFD_ML/blob/master/Mathematical_theory.md&name=1.svg) $\rightarrow$
 
-$\delta \rightarrow$ <img alt="fig01" src="./images/1.svg"?example=foo&sanitize=true> $\rightarrow$
+$\delta \rightarrow$ ![image1](./images/1.png) $\rightarrow$
