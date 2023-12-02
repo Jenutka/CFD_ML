@@ -90,4 +90,4 @@ $\int_{cs}\rho\vec{\mathbf{v}}\cdot\hat{n}\cdot\mathrm d A$ - Net rate of flow o
 
 2. Rate of mass flow: in the x-direction
 
-| $\delta \rightarrow$ | ![image1](./images/1.svg)![image1](./images/1_w.svg) | $\rightarrow$ |
+$\delta \rightarrow$ ![image1](./images/1.svg) $\rightarrow$
