@@ -88,8 +88,19 @@ $\int_{cs}\rho\vec{\mathbf{v}}\cdot\hat{n}\cdot\mathrm d A$ - Net rate of flow o
 
 1. $\dfrac{\partial}{\partial t}\int_{cv}\rho\cdot\mathrm d V = \dfrac{\partial\rho}{\partial t}\delta x \delta y \delta z$, $\rho$ is uniform in $\delta V$
 
-2. Rate of mass flow: in the x-direction
+2. Rate of mass flow: in the xyz-direction
 
-$\delta \rightarrow$ ![image1](https://github.com/Jenutka/CFD_ML/blob/master/images/1.svg?source=https://github.com/Jenutka/CFD_ML/blob/master/Mathematical_theory.md&name=1.svg) $\rightarrow$
+$\left[  \rho u - \dfrac{\delta}{\delta x}(\rho u)\dfrac{\delta x}{2}\right]\delta y \delta z$ $\rightarrow$ ![image1](./images/1.png) ![image1](https://github.com/Jenutka/CFD_ML/blob/master/images/1.svg?source=https://github.com/Jenutka/CFD_ML/blob/master/Mathematical_theory.md&name=1.svg) $\rightarrow$ $\left[  \rho u + \dfrac{\delta}{\delta x}(\rho u)\dfrac{\delta x}{2}\right]\delta y \delta z$
 
-$\delta \rightarrow$ ![image1](./images/1.png) $\rightarrow$
+Net rate of mass outflow in
+
+x-direction: $\dfrac{\delta}{\delta x}(\rho u)\delta x \delta y \delta z$
+
+y-direction: $\dfrac{\delta}{\delta y}(\rho v)\delta x \delta y \delta z$
+
+z-direction: $\dfrac{\delta}{\delta z}(\rho w)\delta x \delta y \delta z$
+
+$\Rightarrow \dfrac{\delta \rho}{\delta t} + \dfrac{\delta}{\delta x}(\rho u) + \dfrac{\delta}{\delta y}(\rho v)+\dfrac{\delta}{\delta z}(\rho w) = 0$
+
+$\text{Vector notation}\rightarrow \dfrac{\delta \rho}{\delta t} + \nabla \cdot\rho\vec{\mathbf{v}} = 0$
+
