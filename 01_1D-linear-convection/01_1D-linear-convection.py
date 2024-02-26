@@ -1,5 +1,6 @@
 import numpy as np
 import matplotlib.pyplot as plt
+import matplotlib.animation as animation
 import time,sys
 
 
@@ -30,22 +31,27 @@ axis.grid()
 
 # discretization & simulation
 
-counter = 0
+def animate(i):
 
-while counter < nt:
     un = np.zeros(nx) + 1   # variable to store value of previous time step
     un = u.copy()      # copy existing values of u
-    for i in range(1,nx):
-        u[i] = un[i] - c * (dt/dx) * (un[i] - un[i-1])
-    counter += dt
-    print(counter, np.average(u))
+    data = []
+    for n in range(1,nx):
+        u[n] = un[n] - c * (dt/dx) * (un[n] - un[n-1])
+        data.append(u[n])
 
+    print(data) 
+    print(len(data))
     # plot update
     axis.clear()
-    axis.plot(np.linspace(0,2,nx), uinit, label='initial shape')
-    axis.plot(np.linspace(0,2,nx), u, label='simulated shape after n-timesteps')
+    n_line = axis.plot(np.linspace(0,2,nx-1), data, label='simulated shape after n-timesteps')
     axis.set(xlabel="x direction", ylabel="u", title="1D linear convection")
     plt.legend()
-    plt.pause(0.01)
+    print(n_line)
+    return n_line
 
+#plt.show()
+ani = animation.FuncAnimation(fig, animate, interval=40, blit=True, 
+                              repeat=True, frames=10)
 plt.show()
+ani.save('1D_lc.gif', dpi=300, writer=animation.PillowWriter(fps=25))
