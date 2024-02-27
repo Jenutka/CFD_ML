@@ -9,7 +9,7 @@ import time,sys
 nx=80       #number of grid points
 dx=4/(nx-1) #distance between adjacent points
 dt=0.025    #time of each timestep
-nt=2       #number of timesteps
+nt=1       #number of timesteps
 c=1         #wave speed
 
 # initial conditions
@@ -23,35 +23,33 @@ print(np.linspace(0,2,nx), u)
 
 # Plot visualizing
 
-plt.style.use('dark_background')
+#plt.style.use('dark_background')
 fig, axis = plt.subplots()
-axis.plot(np.linspace(0,2,nx), u)
 axis.set(xlabel="x direction", ylabel="u", title="1D linear convection")
 axis.grid()
 
 # discretization & simulation
 
+un = np.zeros(nx) + 1   # variable to store value of previous time step
+
 def animate(i):
 
-    un = np.zeros(nx) + 1   # variable to store value of previous time step
     un = u.copy()      # copy existing values of u
-    data = []
     for n in range(1,nx):
         u[n] = un[n] - c * (dt/dx) * (un[n] - un[n-1])
-        data.append(u[n])
 
-    print(data) 
-    print(len(data))
+    print(u) 
+
     # plot update
     axis.clear()
-    n_line = axis.plot(np.linspace(0,2,nx-1), data, label='simulated shape after n-timesteps')
+    init_line = axis.plot(np.linspace(0,2,nx), uinit, label='initial shape')
+    n_line = axis.plot(np.linspace(0,2,nx), un, label='simulated shape after n-timesteps')
     axis.set(xlabel="x direction", ylabel="u", title="1D linear convection")
-    plt.legend()
-    print(n_line)
+    plt.legend(loc=1)
     return n_line
 
 #plt.show()
-ani = animation.FuncAnimation(fig, animate, interval=40, blit=True, 
-                              repeat=True, frames=10)
-plt.show()
+ani = animation.FuncAnimation(fig, animate, interval=80, blit=False, 
+                              repeat=False, frames=90)
 ani.save('1D_lc.gif', dpi=300, writer=animation.PillowWriter(fps=25))
+plt.show()
