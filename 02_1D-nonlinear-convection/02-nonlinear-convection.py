@@ -1,4 +1,4 @@
-## 1D linear convection ##
+## 1D nonlinear convection ##
 
 import numpy as np
 import matplotlib.pyplot as plt
@@ -8,11 +8,10 @@ import time,sys
 
 # input values
 
-nx=160       #number of grid points
+nx=200       #number of grid points
 dx=4/(nx-1) #distance between adjacent points
-dt=0.025    #time of each timestep
-nt=1       #number of timesteps
-c=1         #wave speed
+dt=0.008    #time of each timestep
+nt=1        #number of timesteps
 
 # initial conditions
 
@@ -34,11 +33,11 @@ axis.grid()
 
 un = np.zeros(nx) + 1   # variable to store value of previous time step
 
-def animate(i):
+def animate(n):
 
     un = u.copy()      # copy existing values of u
-    for n in range(1,nx):
-        u[n] = un[n] - c * (dt/dx) * (un[n] - un[n-1])
+    for i in range(1,nx):
+        u[i] = un[i] - un[i] * (dt/dx) * (un[i] - un[i-1])
 
     print(u) 
 
@@ -46,12 +45,12 @@ def animate(i):
     axis.clear()
     init_line = axis.plot(np.linspace(0,2,nx), uinit, label='initial shape')
     n_line = axis.plot(np.linspace(0,2,nx), un, label='simulated shape after n-timesteps')
-    axis.set(xlabel="x direction", ylabel="u", title="1D linear convection")
+    axis.set(xlabel="x direction", ylabel="u", title="1D nonlinear convection")
     plt.legend(loc=1)
     return n_line
 
 #plt.show()
 ani = animation.FuncAnimation(fig, animate, interval=80, blit=False, 
-                              repeat=False, frames=90)
-ani.save('1D_lc.gif', dpi=100, writer=animation.PillowWriter(fps=25))
+                              repeat=False, frames=200)
+ani.save('1D_nlc.gif', dpi=100, writer=animation.PillowWriter(fps=25))
 plt.show()
