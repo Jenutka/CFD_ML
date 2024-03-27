@@ -1,4 +1,4 @@
-## 1D nonlinear convection ##
+## Convergence, CFL-number condition ##
 
 import numpy as np
 import matplotlib.pyplot as plt
@@ -8,10 +8,13 @@ import time,sys
 
 # input values
 
-nx=200       #number of grid points
-dx=4/(nx-1)  #distance between adjacent points
-dt=0.008     #time of each timestep
-nt=1         #number of timesteps
+nx=61       #number of grid points
+dx=2/(nx-1) #distance between adjacent points
+nt=20       #number of timesteps
+c=1         #wave speed
+sigma=0.5   #CFL number
+
+dt = sigma * dx
 
 # initial conditions
 
@@ -24,6 +27,9 @@ print(np.linspace(0,2,nx), u)
 
 # Plot visualizing
 
+parameter_title = ("1D linear convection, " + "nr. of grid points = " + str(nx) + 
+                   ", timestep dt = " + str(round(dt, 3)))
+
 #plt.style.use('dark_background')
 fig, axis = plt.subplots()
 axis.set(xlabel="x direction", ylabel="u", title="1D linear convection")
@@ -33,11 +39,12 @@ axis.grid()
 
 un = np.zeros(nx) + 1   # variable to store value of previous time step
 
-def animate(n):
+
+def animate(i):
 
     un = u.copy()      # copy existing values of u
-    for i in range(1,nx):
-        u[i] = un[i] - un[i] * (dt/dx) * (un[i] - un[i-1])
+    for n in range(1,nx):
+        u[n] = un[n] - c * (dt/dx) * (un[n] - un[n-1])
 
     print(u) 
 
@@ -45,12 +52,12 @@ def animate(n):
     axis.clear()
     init_line = axis.plot(np.linspace(0,2,nx), uinit, label='initial shape')
     n_line = axis.plot(np.linspace(0,2,nx), un, label='simulated shape after n-timesteps')
-    axis.set(xlabel="x direction", ylabel="u", title="1D nonlinear convection")
-    plt.legend(loc=1)
+    axis.set(xlabel="x direction", ylabel="u", title=parameter_title)
+    plt.legend(loc=3)
     return n_line
 
 #plt.show()
 ani = animation.FuncAnimation(fig, animate, interval=80, blit=False, 
-                              repeat=False, frames=200)
-ani.save('1D_nlc.gif', dpi=100, writer=animation.PillowWriter(fps=25))
+                              repeat_delay=1000, repeat=True, frames=30)
+ani.save('1D_lc_sigma_nx61.gif', dpi=100, writer=animation.PillowWriter(fps=25))
 plt.show()
