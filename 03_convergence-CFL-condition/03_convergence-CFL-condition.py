@@ -8,7 +8,7 @@ import time,sys
 
 # input values
 
-nx=61       #number of grid points
+nx=121       #number of grid points
 dx=2/(nx-1) #distance between adjacent points
 nt=20       #number of timesteps
 c=1         #wave speed
@@ -58,6 +58,6 @@ def animate(i):
 
 #plt.show()
 ani = animation.FuncAnimation(fig, animate, interval=80, blit=False, 
-                              repeat_delay=1000, repeat=True, frames=30)
-ani.save('1D_lc_sigma_nx61.gif', dpi=100, writer=animation.PillowWriter(fps=25))
+                              repeat_delay=1000, repeat=True, frames=80)
+ani.save('1D_lc_sigma_nx121.gif', dpi=100, writer=animation.PillowWriter(fps=25))
 plt.show()

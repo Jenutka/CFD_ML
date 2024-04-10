@@ -40,7 +40,7 @@ def animate(i):
     for n in range(1,nx):
         u[n] = un[n] - c * (dt/dx) * (un[n] - un[n-1])
 
-    print(u) 
+    print(u)
 
     # plot update
     axis.clear()
@@ -51,7 +51,7 @@ def animate(i):
     return n_line
 
 #plt.show()
-ani = animation.FuncAnimation(fig, animate, interval=80, blit=False, 
+ani = animation.FuncAnimation(fig, animate, interval=80, blit=False,
                               repeat=False, frames=90)
 ani.save('1D_lc.gif', dpi=100, writer=animation.PillowWriter(fps=25))
 plt.show()
