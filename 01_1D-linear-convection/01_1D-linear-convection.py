@@ -26,7 +26,7 @@ print(np.linspace(0,2,nx), u)
 # Plot visualizing
 
 #plt.style.use('dark_background')
-fig, axis = plt.subplots()
+error, axis = plt.subplots()
 axis.set(xlabel="x direction", ylabel="u", title="1D linear convection")
 axis.grid()
 
